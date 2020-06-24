@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import ast
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(fswj4$kih&dg-bq@7y)t*3a9xpk^xypeyw1twqlj7=3z62fxn'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ast.literal_eval(os.getenv("DEBUG_VALUE"))
 
-ALLOWED_HOSTS = ["djangoblogfirst.herokuapp.com"]
+ALLOWED_HOSTS = ["djangoblogfirst.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -132,6 +132,7 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
+
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS")
 
